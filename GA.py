@@ -61,9 +61,9 @@ def initialPopulation(popSize, cityList):
 
 def rankRoutes(population):
     fitnessResults = {}
-    for i in range(0,len(population)):
+    for i in range(0, len(population)):
         fitnessResults[i] = Fitness(population[i]).routeFitness()
-    return sorted(fitnessResults.items(), key = operator.itemgetter(1), reverse = True)
+    return sorted(fitnessResults.items(), key=operator.itemgetter(1), reverse=True)
 
 
 def selection(popRanked, eliteSize):
@@ -146,6 +146,7 @@ def mutatePopulation(population, mutationRate):
         mutatedPop.append(mutatedInd)
     return mutatedPop
 
+
 def nextGeneration(currentGen, eliteSize, mutationRate):
     popRanked = rankRoutes(currentGen)
     selectionResults = selection(popRanked, eliteSize)
@@ -183,15 +184,22 @@ def geneticAlgorithmPlot(population, popSize, eliteSize, mutationRate, generatio
     plt.show()
 
 
-
-#===================================================================================
+# ===================================================================================
 # Random generation of cities and running GA
-#===================================================================================
+# ===================================================================================
 cityList = []
-for i in range(0,25):
+for i in range(0, 25):
     cityList.append(City(x=int(random.random() * 200), y=int(random.random() * 200)))
 
-geneticAlgorithm(population=cityList, popSize=100, eliteSize=20, mutationRate=0.01, generations=100)
+route = geneticAlgorithm(population=cityList, popSize=100, eliteSize=20, mutationRate=0.01, generations=500)
+# route = geneticAlgorithmPlot(population=cityList, popSize=100, eliteSize=20, mutationRate=0.01, generations=500)
 
-geneticAlgorithmPlot(population=cityList, popSize=100, eliteSize=20, mutationRate=0.01, generations=500)
+xc = [city.x for city in cityList]
+yc = [city.y for city in cityList]
 
+xs = [city.x for city in route]
+ys = [city.y for city in route]
+
+plt.close('all')
+plt.plot(xc, yc, 'o')
+plt.plot(xs, ys)
