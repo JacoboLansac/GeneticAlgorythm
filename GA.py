@@ -16,8 +16,8 @@ class City:
         distance = np.sqrt((xDis ** 2) + (yDis ** 2))
         return distance
 
-    def __repr__(self):
-        return "(" + str(self.x) + "," + str(self.y) + ")"
+    # def __repr__(self):
+    #     return "(" + str(self.x) + "," + str(self.y) + ")"
 
 
 class Fitness:
